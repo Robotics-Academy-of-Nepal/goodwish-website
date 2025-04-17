@@ -9,6 +9,7 @@ import Products from './Products/Products.jsx';
 import Home from './Home/Home.jsx';
 import Footer from './Footer/Footer.jsx';
 import Chatbot from './Chatbot/Chatbot.jsx';
+import Login from './Login/Login.jsx';
 import './App.css';
 
 // Create a wrapper component to use useLocation
@@ -34,6 +35,7 @@ function AppContent() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </main>
       {!isLandingPage && <Footer />}
