@@ -1,0 +1,202 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Home container */
+.home-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #1e3a8a;
+}
+
+/* Wave background */
+.wave-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(30deg, #3b82f6, #1e3a8a, #1e3a8a, #60a5fa); /* Gradient of blues */
+  background-size: 400%; /* For smooth animation */
+  animation: wave 10s ease-in-out infinite; /* Wave animation */
+  animation-delay: 3s;
+}
+
+/* Wave Animation Keyframes */
+@keyframes wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Content styling */
+.content {
+  position: fixed;
+  z-index: 1;
+  text-align: start;
+  color: white;
+  width: 90%; /* Reduced from 100% to give some margin */
+  max-width: 1200px;
+  padding: 2%;
+  margin-left: 0%;
+}
+
+.logo-container {
+  background: black;
+}
+
+.logo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  margin-top: -6%;
+  width: min(50vw, 350px);
+}
+
+p {
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  font-family: sans-serif;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  margin-left: 20%;
+  margin-top: 20px;
+  /* background-color: bisque; */
+  position: fixed;
+}
+
+button {
+  padding: 12px 24px;
+  background: rgba(0,0,0,0.1);
+  background-size: 400%; /* Match wave animation */
+  color: white;
+  border: 2px solid transparent; /* Transparent border by default */
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  animation: wave 10s ease-in-out infinite; /* Apply wave animation */
+  animation-delay: 3s; /* Match wave delay */
+}
+
+button:hover {
+  background-color: #1e3a8a;
+  color: white;
+  border-color: white;
+}
+
+button:hover .button-icon {
+  color: white; /* Ensure icon stays white on hover */
+}
+
+/* Button icon styling */
+.button-icon {
+  color: white; 
+  font-size: 30px; 
+}
+
+.button-text {
+  white-space: nowrap; /* Keep "Go to website" on one line */
+  font-family: sans-serif;
+  font-size: 30px;
+}
+
+/* Dynamic text container */
+.dynamic-texts {
+  min-height: 150px; 
+  width: 100%;
+  overflow: hidden;
+}
+
+/* TypeAnimation styling */
+.type-animation {
+  font-family: sans-serif;
+  font-size: 85px;
+  font-weight: 400;
+  color: white;
+  display: inline-block;
+  word-break: break-word; /* Allow text to break to a new line */
+  white-space: normal; /* Allow text to wrap */
+  line-height: 1.1; /* Better line height for wrapped text */
+}
+
+/* Cursor styling */
+.type-animation > .TypeAnimationCursor {
+  color: white;
+  font-size: 85px; /* Match text size */
+  margin-left: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .type-animation, 
+  .type-animation > .TypeAnimationCursor {
+    font-size: 50px;
+  }
+  
+  p {
+    font-size: 20px;
+  }
+  
+  .button-text {
+    font-size: 20px;
+  }
+  
+  .button-icon {
+    font-size: 20px;
+  }
+  
+  .dynamic-texts {
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .type-animation, 
+  .type-animation > .TypeAnimationCursor {
+    font-size: 36px;
+  }
+  
+  p {
+    font-size: 16px;
+  }
+  
+  .button-text {
+    font-size: 16px;
+  }
+  
+  .button-icon {
+    font-size: 16px;
+  }
+  
+  .dynamic-texts {
+    min-height: 100px;
+  }
+  
+  .logo {
+    width: min(70vw, 250px);
+  }
+}

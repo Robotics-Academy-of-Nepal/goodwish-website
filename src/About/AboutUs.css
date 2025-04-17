@@ -1,0 +1,508 @@
+/* AboutUs.css */
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* About Us container */
+  .about-us-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100px; /* Offset for fixed navbar */
+    background-color: #f5f5f5; /* Light background for contrast */
+    font-family: sans-serif;
+    min-height: 100vh; /* Ensure it takes full height */
+    overflow-y: auto; /* Make the page scrollable */
+  }
+  
+  /* Wave background (consistent with navbar and landing page) */
+  .about-us-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(30deg, #3b82f6, #1e3a8a, #1e3a8a, #60a5fa);
+    background-size: 400%;
+    animation: wave 10s ease-in-out infinite;
+    animation-delay: 3s;
+    z-index: -1;
+    opacity: 0.1; /* Subtle overlay effect */
+  }
+  
+  /* Wave Animation Keyframes (same as navbar) */
+  @keyframes wave {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* General section styling */
+  section {
+    width: 100%; /* Full-width sections */
+    padding: 3rem 2rem; /* Increased padding for better spacing */
+  }
+  
+  /* Section 1: Company Description */
+  .company-description {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .company-description h1 {
+    font-size: 2.5rem;
+    color: #1e3a8a;
+    margin-bottom: 1.5rem;
+  }
+  
+  .company-description p {
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: start;
+  }
+  
+  /* Section 2: Vision and Mission */
+  .vision-mission {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .vision, .mission {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+    text-align: start;
+  }
+  
+  .vision h2, .mission h2 {
+    font-size: 1.8rem;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+  }
+  
+  .vision p, .mission p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Section 3: CEO Message */
+  .ceo-message {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 3rem 0; /* Remove horizontal padding to allow full-width content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    text-align: start;
+  }
+  
+  .ceo-message h2 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    text-align: start;
+    margin-bottom: 2rem;
+    margin-left: 20%;
+  }
+  
+  .ceo-content {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    max-width: 1200px; /* Match the max-width of other sections */
+    margin: 0 auto; /* Center the content */
+    padding: 0 2rem; /* Add padding inside the container */
+    flex-direction: row; /* Default to desktop layout - side by side */
+    text-align: start;
+  }
+  
+  .ceo-text {
+    flex: 3; /* Take up more space on desktop */
+    text-align: left; /* Align text to the left on desktop */
+  }
+  
+  .ceo-text p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .ceo-signature {
+    font-style: italic;
+    font-weight: 500;
+    color: #1e3a8a;
+  }
+  
+  .ceo-image {
+    flex: 1; /* Take up less space on desktop */
+    text-align: right; /* Align image to the right on desktop */
+  }
+  
+  .ceo-image img {
+    height: auto;
+    width: 100%;
+    /* max-width: 300px; */
+    /* Different styles for mobile vs desktop controlled by media queries */
+  }
+  
+  /* Desktop: Full body image, non-circular */
+  @media (min-width: 769px) {
+    .ceo-image img {
+      border-radius: 0; /* No rounded corners for desktop */
+      border: none;
+      height: 600px;
+      width: 600px;
+      margin-right: -20%;
+      margin-top: -50%;
+    }
+  }
+  
+  /* Section 4: Products (WishChat only) */
+  .products {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .products h2 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .product-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.8rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eaeaea;
+  }
+  
+  .product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  .product-item h3 {
+    font-size: 1.5rem;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .product-item p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .product-item-content {
+    flex-grow: 1;
+  }
+  
+  .product-learn-more {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(30deg, #3b82f6, #1e3a8a, #1e3a8a, #60a5fa);
+    background-size: 400%;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    animation: wave 10s ease-in-out infinite;
+    animation-delay: 3s;
+    text-align: center;
+    font-weight: 500;
+    margin-top: auto;
+  }
+  
+  .product-learn-more:hover {
+    background-color: #60a5fa;
+    color: white;
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+  }
+  
+  /* Responsive adjustments for products section */
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .product-item h3 {
+      font-size: 1.3rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .product-item {
+      padding: 1.5rem;
+    }
+    
+    .product-item h3 {
+      font-size: 1.2rem;
+    }
+    
+    .product-item p {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .items-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .item {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    max-width: 400px;
+  }
+  
+  .item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .item h3 {
+    font-size: 1.5rem;
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+  }
+  
+  .item p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .learn-more {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(30deg, #3b82f6, #1e3a8a, #1e3a8a, #60a5fa);
+    background-size: 400%;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    animation: wave 10s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+  
+  .learn-more:hover {
+    background-color: #60a5fa;
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .vision-mission {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  
+    /* Mobile specific CEO section styling */
+    .ceo-content {
+      flex-direction: column-reverse; /* Image first, then text */
+      text-align: center;
+    }
+  
+    .ceo-text {
+      text-align: center; /* Center text on mobile */
+    }
+  
+    .ceo-image {
+      text-align: center; /* Center image on mobile */
+      margin-bottom: 1.5rem; /* Add space below image */
+    }
+  
+    .ceo-image img {
+      max-width: 200px;
+      border-radius: 50%; /* Circular image for mobile */
+      border: 3px solid #3b82f6; /* Blue border for mobile */
+    }
+  
+    .company-description h1, .ceo-message h2, .products h2 {
+      font-size: 1.8rem;
+    }
+  
+    .vision h2, .mission h2 {
+      font-size: 1.5rem;
+    }
+  
+    .item h3 {
+      font-size: 1.3rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .company-description h1, .ceo-message h2, .products h2 {
+      font-size: 1.5rem;
+    }
+  
+    .vision h2, .mission h2 {
+      font-size: 1.3rem;
+    }
+  
+    .company-description p, .vision p, .mission p, .ceo-text p, .item p {
+      font-size: 0.9rem;
+    }
+  
+    .ceo-image img {
+      max-width: 150px;
+    }
+  }
+
+  /* Projects section styling */
+.projects {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .projects h2 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .project-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.8rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eaeaea;
+  }
+  
+  .project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  .project-item h3 {
+    font-size: 1.5rem;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .project-item p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .project-item-content {
+    flex-grow: 1;
+  }
+  
+  .project-learn-more {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(30deg, #3b82f6, #1e3a8a, #1e3a8a, #60a5fa);
+    background-size: 400%;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    animation: wave 10s ease-in-out infinite;
+    animation-delay: 3s;
+    text-align: center;
+    font-weight: 500;
+    margin-top: auto;
+  }
+  
+  .project-learn-more:hover {
+    background-color: #60a5fa;
+    color: white;
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+  }
+  
+  /* Responsive adjustments for projects section */
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .project-item h3 {
+      font-size: 1.3rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .project-item {
+      padding: 1.5rem;
+    }
+    
+    .project-item h3 {
+      font-size: 1.2rem;
+    }
+    
+    .project-item p {
+      font-size: 0.9rem;
+    }
+  }

@@ -1,0 +1,252 @@
+/* Navbar container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(30deg, #3b82f6, #1e3a8a, #1e3a8a, #60a5fa);
+  background-size: 400%;
+  z-index: 1000;
+  animation: wave 10s ease-in-out infinite;
+  animation-delay: 3s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Wave Animation Keyframes */
+@keyframes wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Inner container for layout */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem; /* Added padding for better spacing */
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Logo styling - increased padding for better gap */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 30rem; /* Increased gap between logo and links */
+}
+
+/* Logo image */
+.logo-img {
+  width: 180px;
+  height: auto;
+}
+
+/* Navigation links - adjusted for better spacing */
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1rem; /* Added small gap for better spacing */
+  height: 100%;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end; /* Pushes links to the right */
+}
+
+/* Spacing between nav items */
+.nav-links li:not(:last-child) {
+  margin-right: 3rem;
+}
+
+/* Ensure login stays on the rightmost edge */
+.nav-links li:last-child {
+  margin-left: auto;
+  padding-right: 2rem; /* Increased padding for right alignment */
+}
+
+/* Center nav items vertically */
+.nav-links li {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Nav link styling */
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Hover effect for nav links */
+.nav-link:hover {
+  color: #60a5fa;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Style the Login link as a button */
+.login-link {
+  background-color: rgba(30, 58, 138, 0.5);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for login link */
+.login-link:hover {
+  background-color: #60a5fa;
+  border-color: white;
+  color: white;
+  text-shadow: none;
+}
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1010;
+}
+
+/* Hamburger icon styling */
+.hamburger-icon, 
+.hamburger-icon::before, 
+.hamburger-icon::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger-icon {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hamburger-icon::before {
+  top: -10px;
+  left: 0;
+}
+
+.hamburger-icon::after {
+  top: 10px;
+  left: 0;
+}
+
+/* X animation when open */
+.hamburger.open .hamburger-icon {
+  background-color: transparent;
+}
+
+.hamburger.open .hamburger-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.hamburger.open .hamburger-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* Overlay for closing menu */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 900;
+}
+
+.nav-overlay.active {
+  display: block;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 1400px) {
+  .hamburger {
+    display: block;
+    position: fixed; /* Ensure it's fixed */
+    top: 20px; /* Adjust for vertical positioning */
+    right: 20px; /* Fixed to the right side */
+  }
+
+  .navbar-container {
+    padding: 0 1rem;
+  }
+  
+  .navbar-logo {
+    padding-left: 1rem;
+    padding-right: 0; /* Remove extra padding on mobile */
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 200px;
+    height: 80vh;
+    background: linear-gradient(30deg, #3b82f6, #1e3a8a, #1e3a8a, #60a5fa);
+    background-size: 400%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    padding: 5rem 2rem 2rem;
+    transition: right 0.3s ease;
+    animation: wave 10s ease-in-out infinite;
+    animation-delay: 3s;
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links li:not(:last-child) {
+    margin-right: 0;
+  }
+  
+  .nav-links li:last-child {
+    margin-left: 0;
+    padding-right: 0;
+  }
+
+  .nav-link {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .login-link {
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .logo-img {
+    width: 140px;
+  }
+}
