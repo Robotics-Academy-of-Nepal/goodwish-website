@@ -6,8 +6,34 @@ import './Chatbot.css';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000'
+  baseURL: 'https://chatbot.goodwish.com.np'
 });
+
+// Add this function to parse and format the LLM response
+const formatLLMResponse = (responseText) => {
+  try {
+    // First check if the response is already a JSON object
+    const responseObj = typeof responseText === 'string' 
+      ? JSON.parse(responseText)
+      : responseText;
+    
+    // Extract the response string
+    let formattedText = responseObj.response || responseText;
+    
+    // Handle markdown-like formatting (if needed)
+    // Replace **text** with <strong>text</strong>
+    formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    
+    // If you want to handle line breaks
+    formattedText = formattedText.replace(/\\n/g, '<br>');
+    
+    return formattedText;
+  } catch (error) {
+    console.error('Error parsing response:', error);
+    // Return the original text if parsing fails
+    return responseText;
+  }
+};
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -137,8 +163,11 @@ function Chatbot() {
     try {
       const response = await api.post('/api/query-chatbot/', formData);
       
+      // Parse and format the response
+      const formattedResponse = formatLLMResponse(response.data);
+      
       // Start typing animation
-      setFullResponseText(response.data.response);
+      setFullResponseText(formattedResponse);
       setTypingText('');
       setIsTyping(true);
       
@@ -189,12 +218,20 @@ function Chatbot() {
           ) : (
             messages.map((msg, index) => (
               <div key={index} className={`message ${msg.role}`}>
-                <div className="message-content">
-                  {index === messages.length - 1 && msg.role === 'assistant' && isTyping ? 
-                    typingText : msg.content}
-                  {index === messages.length - 1 && msg.role === 'assistant' && isTyping && 
-                    <span className="cursor-blink">|</span>}
-                </div>
+                {msg.role === 'assistant' ? (
+                  <div 
+                    className="message-content"
+                    dangerouslySetInnerHTML={{ 
+                      __html: index === messages.length - 1 && isTyping ? typingText : msg.content 
+                    }}
+                  />
+                ) : (
+                  <div className="message-content">
+                    {msg.content}
+                  </div>
+                )}
+                {index === messages.length - 1 && msg.role === 'assistant' && isTyping && 
+                  <span className="cursor-blink">|</span>}
                 {msg.hasImage && <div className="image-indicator">📷 Image uploaded</div>}
               </div>
             ))
