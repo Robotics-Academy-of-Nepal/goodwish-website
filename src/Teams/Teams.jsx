@@ -13,7 +13,7 @@ import teamMember10 from '../assets/teams/sapana.jpg';
 import teamMember11 from '../assets/teams/abiral.jpg';
 import teamMember12 from '../assets/teams/kiran.jpg';
 import teamMember13 from '../assets/teams/apil.jpg';
-import teamMember13 from '../assets/teams/anish.png'
+import teamMember14 from '../assets/teams/anish.png'
 import { FaLinkedin } from 'react-icons/fa';
 
 function Teams() {
