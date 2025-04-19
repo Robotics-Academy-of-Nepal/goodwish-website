@@ -4,7 +4,7 @@ import teamMember1 from '../assets/teams/ceo.png';
 import teamMember2 from '../assets/teams/Tejash.jpg';
 import teamMember3 from '../assets/teams/nibesh.jpg';
 import teamMember4 from '../assets/teams/poem.jpg';
-import teamMember5 from '../assets/teams/nikesh.jpeg';
+import teamMember5 from '../assets/teams/nikesh.jpg';
 import teamMember6 from '../assets/teams/bikesh.jpg';
 import teamMember7 from '../assets/teams/aakriti.jpg';
 import teamMember8 from '../assets/teams/Prajwal.jpg';
