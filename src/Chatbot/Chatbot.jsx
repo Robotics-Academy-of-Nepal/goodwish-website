@@ -6,7 +6,7 @@ import './Chatbot.css';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000'
+  baseURL: 'https://chatbot.goodwish.com.np'
 });
 
 // Function to parse and format the LLM response

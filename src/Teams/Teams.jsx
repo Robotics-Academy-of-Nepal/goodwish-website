@@ -27,7 +27,7 @@ function Teams() {
     {
       name: 'Abiral Bhandari',
       position: 'Chief Operating Officer (COO)',
-      role: 'Robotics Engineer (Designing and Assembly)',
+      role: 'Robotics Engineer (R&D Engineer)',
       image: teamMember11,
       linkedin: 'https://www.linkedin.com/in/abiral-bhandari-b9a454199/',
       team: 'Leadership',
@@ -100,7 +100,7 @@ function Teams() {
     {
       name: 'Kiran KC',
       position: 'Head of Robotics Department',
-      role: 'Robotics Engineer (Assembly)',
+      role: 'Robotics Engineer (R&D Engineer)',
       image: teamMember12,
       linkedin: '',
       team: 'Robotics',
