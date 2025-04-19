@@ -4,15 +4,16 @@ import teamMember1 from '../assets/teams/ceo.png';
 import teamMember2 from '../assets/teams/Tejash.jpg';
 import teamMember3 from '../assets/teams/nibesh.jpg';
 import teamMember4 from '../assets/teams/poem.jpg';
-import teamMember5 from '../assets/teams/Nikesh.jpeg';
-import teamMember6 from '../assets/teams/bikesh.png';
+import teamMember5 from '../assets/teams/nikesh.jpeg';
+import teamMember6 from '../assets/teams/bikesh.jpg';
 import teamMember7 from '../assets/teams/aakriti.jpg';
 import teamMember8 from '../assets/teams/Prajwal.jpg';
 import teamMember9 from '../assets/teams/Abhisekh.jpg';
 import teamMember10 from '../assets/teams/sapana.jpg';
 import teamMember11 from '../assets/teams/abiral.jpg';
 import teamMember12 from '../assets/teams/kiran.jpg';
-import teamMember13 from '../assets/teams/apil.jpeg';
+import teamMember13 from '../assets/teams/apil.jpg';
+import teamMember13 from '../assets/teams/anish.png'
 import { FaLinkedin } from 'react-icons/fa';
 
 function Teams() {
@@ -107,8 +108,16 @@ function Teams() {
     },
     {
       name: 'Apil Sharma',
-      role: 'Jr. Robotics Engineer (Programming)',
+      role: 'Jr. Embedded Engineer',
       image: teamMember13,
+      linkedin: '',
+      team: 'Robotics',
+    },
+
+    {
+      name: 'Anish Thapa Magar',
+      role: 'Jr. Embedded Engineer',
+      image: teamMember14,
       linkedin: '',
       team: 'Robotics',
     },
