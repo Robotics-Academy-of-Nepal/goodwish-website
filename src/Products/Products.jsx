@@ -29,7 +29,7 @@ function Products() {
                 <li>📊 Analytics dashboard to track engagement and performance</li>
                 <li>🔒 Secure and scalable for businesses of all sizes</li>
               </ul>
-              <a href="/contact" className="product-cta">
+              <a href="https://wishchat.goodwish.com.np" className="product-cta">
                 Try WishChat Now
               </a>
             </div>
@@ -48,7 +48,7 @@ function Products() {
           <br/>To try wishchat you can go to the official website.<br/> For Enterprise solutions please contact the 
           Goodwish Engineering team using the contact information given below.  
         </p>
-        <a href="/contact" className="product-cta">
+        <a href="https://wishchat.goodwish.com.np" className="product-cta">
           Get Started with WishChat
         </a>
       </section>

@@ -1,6 +1,7 @@
 // AboutUs.jsx
 import React from 'react';
 import './AboutUs.css';
+import ceo from  '../assets/teams/ceo.png'
 
 function AboutUs() {
   return (
@@ -49,7 +50,7 @@ function AboutUs() {
             <p className="ceo-signature">— Bikrant Karki, CEO</p>
           </div>
           <div className="ceo-image">
-            <img src="src/assets/teams/ceo.png" alt="CEO Bikrant Karki" />
+            <img src={ceo} alt="CEO Bikrant Karki" />
           </div>
         </div>
       </section>

@@ -1,6 +1,8 @@
 // Projects.jsx
 import React, { useState } from 'react';
 import './Projects.css';
+import guthiLogo from '../assets/guthi-sansthan.png';
+import abroadLogo from '../assets/abroad-unbox.png';
 
 function Projects() {
 
@@ -45,9 +47,12 @@ function Projects() {
             </a>
           </div>
           <div className="project-image">
-            <img src="src/assets/abroad-unbox.png" alt="Abroad Unbox Website Screenshot"
-            onClick={() => openFullScreen("src/assets/abroad-unbox.png")}
-            style={{ cursor: 'pointer' }} />
+            <img 
+              src={abroadLogo} 
+              alt="Guthi Sansthan Website Screenshot"
+              onClick={() => openFullScreen(guthiLogo)}
+              style={{ cursor: 'pointer' }}
+            />
           </div>
         </div>
       </section>
@@ -65,9 +70,12 @@ function Projects() {
             </a>
           </div>
           <div className="project-image">
-            <img src="src/assets/guthi-sansthan.png" alt="Guthi Sansthan Website Screenshot" 
-            onClick={() => openFullScreen("src/assets/guthi-sansthan.png")}
-            style={{ cursor: 'pointer' }}/>
+            <img 
+              src={guthiLogo} 
+              alt="Guthi Sansthan Website Screenshot"
+              onClick={() => openFullScreen(guthiLogo)}
+              style={{ cursor: 'pointer' }}
+            />
           </div>
         </div>
       </section>
