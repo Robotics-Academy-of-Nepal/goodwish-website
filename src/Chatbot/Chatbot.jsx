@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 import { IoMdSend } from "react-icons/io";
-import { BsChatDots, BsImage } from "react-icons/bs";
+import { BsChatDots, BsImage, BsLink45Deg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import './Chatbot.css';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://chatbot.goodwish.com.np'
+  baseURL: 'http://localhost:8000'
 });
 
-// Add this function to parse and format the LLM response
+// Function to parse and format the LLM response
 const formatLLMResponse = (responseText) => {
   try {
     // First check if the response is already a JSON object
@@ -35,6 +35,12 @@ const formatLLMResponse = (responseText) => {
   }
 };
 
+// Function to extract URLs from text
+const extractUrls = (text) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.match(urlRegex) || [];
+};
+
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -47,6 +53,9 @@ function Chatbot() {
   const [fullResponseText, setFullResponseText] = useState('');
   const [typingSpeed, setTypingSpeed] = useState(30); // ms per character
   const [showImageCloseHint, setShowImageCloseHint] = useState(false);
+  const [detectedLinks, setDetectedLinks] = useState([]);
+  const [showLinkPrompt, setShowLinkPrompt] = useState(false);
+  const [currentLink, setCurrentLink] = useState('');
   
   const messageEndRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -57,7 +66,7 @@ function Chatbot() {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages, typingText]);
+  }, [messages, typingText, showLinkPrompt]);
 
   // Handle textarea auto-resize
   useEffect(() => {
@@ -86,6 +95,15 @@ function Chatbot() {
           updatedMessages.push({ role: 'assistant', content: fullResponseText });
           return updatedMessages;
         });
+        
+        // Check for links after typing is complete
+        const links = extractUrls(fullResponseText);
+        if (links.length > 0) {
+          setDetectedLinks(links);
+          setCurrentLink(links[0]);
+          setShowLinkPrompt(true);
+        }
+        
         setTypingText('');
         setFullResponseText('');
       }
@@ -124,10 +142,20 @@ function Chatbot() {
     }
   };
 
+  const handleLinkAction = (navigate) => {
+    if (navigate && currentLink) {
+      window.open(currentLink, '_blank');
+    }
+    setShowLinkPrompt(false);
+  };
+
   const handleSubmit = async (e) => {
     e?.preventDefault();
     
     if ((!input.trim() && !imageFile) || loading) return;
+
+    // Hide link prompt if it's showing when user sends a new message
+    setShowLinkPrompt(false);
 
     const userMessage = input.trim();
     const hadImage = !!imageFile;
@@ -187,6 +215,7 @@ function Chatbot() {
     try {
       await api.post('/api/clear-history/');
       setMessages([]);
+      setShowLinkPrompt(false);
     } catch (error) {
       console.error('Error clearing history:', error);
     }
@@ -245,6 +274,21 @@ function Chatbot() {
               </div>
             </div>
           )}
+          
+          {/* Link prompt */}
+          {showLinkPrompt && (
+            <div className="link-prompt">
+              <div className="link-prompt-content">
+                <BsLink45Deg className="link-icon" />
+                <p>Do you want me to take you there?</p>
+                <div className="link-actions">
+                  <button onClick={() => handleLinkAction(true)} className="link-action-btn yes-btn">Yes</button>
+                  <button onClick={() => handleLinkAction(false)} className="link-action-btn no-btn">No</button>
+                </div>
+              </div>
+            </div>
+          )}
+          
           <div ref={messageEndRef} />
         </div>
         

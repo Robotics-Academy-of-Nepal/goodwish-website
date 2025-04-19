@@ -369,3 +369,84 @@
     font-size: 20px;
   }
 }
+
+/* Add these styles to your existing CSS file */
+
+/* Link prompt styling */
+.link-prompt {
+  align-self: center;
+  margin: 10px 0;
+  width: 90%;
+  animation: fadeIn 0.3s ease;
+}
+
+.link-prompt-content {
+  background: linear-gradient(30deg, #e0f2fe, #dbeafe);
+  border-radius: 12px;
+  padding: 12px 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.link-icon {
+  color: #3b82f6;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.link-prompt p {
+  color: #334155;
+  font-size: 13px;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.link-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.link-action-btn {
+  border: none;
+  border-radius: 20px;
+  padding: 4px 15px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.yes-btn {
+  background: linear-gradient(30deg, #3b82f6, #1e3a8a);
+  color: white;
+}
+
+.yes-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.no-btn {
+  background: #e2e8f0;
+  color: #64748b;
+}
+
+.no-btn:hover {
+  background: #cbd5e1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
