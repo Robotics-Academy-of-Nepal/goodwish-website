@@ -24,6 +24,12 @@ const formatLLMResponse = (responseText) => {
     // Replace **text** with <strong>text</strong>
     formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
+    // Make URLs clickable
+    formattedText = formattedText.replace(
+      /(https?:\/\/[^\s]+)/g, 
+      '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+    );
+    
     // If you want to handle line breaks
     formattedText = formattedText.replace(/\\n/g, '<br>');
     
@@ -41,6 +47,13 @@ const extractUrls = (text) => {
   return text.match(urlRegex) || [];
 };
 
+// Function to prepare the response for typing animation
+const prepareResponseForTyping = (responseText) => {
+  // First apply all HTML formatting
+  let formattedText = formatLLMResponse(responseText);
+  return formattedText;
+};
+
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -51,11 +64,12 @@ function Chatbot() {
   const [typingText, setTypingText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [fullResponseText, setFullResponseText] = useState('');
-  const [typingSpeed, setTypingSpeed] = useState(30); // ms per character
+  const [typingSpeed, setTypingSpeed] = useState(10); // Increased typing speed (was 30)
   const [showImageCloseHint, setShowImageCloseHint] = useState(false);
   const [detectedLinks, setDetectedLinks] = useState([]);
   const [showLinkPrompt, setShowLinkPrompt] = useState(false);
   const [currentLink, setCurrentLink] = useState('');
+  const [rawResponseText, setRawResponseText] = useState('');
   
   const messageEndRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -76,7 +90,7 @@ function Chatbot() {
     }
   }, [input]);
 
-  // Typing animation effect
+  // Typing animation effect - modified for smoother link typing
   useEffect(() => {
     if (isTyping && fullResponseText) {
       if (typingText.length < fullResponseText.length) {
@@ -97,7 +111,7 @@ function Chatbot() {
         });
         
         // Check for links after typing is complete
-        const links = extractUrls(fullResponseText);
+        const links = extractUrls(rawResponseText);
         if (links.length > 0) {
           setDetectedLinks(links);
           setCurrentLink(links[0]);
@@ -106,9 +120,10 @@ function Chatbot() {
         
         setTypingText('');
         setFullResponseText('');
+        setRawResponseText('');
       }
     }
-  }, [isTyping, typingText, fullResponseText, typingSpeed]);
+  }, [isTyping, typingText, fullResponseText, typingSpeed, rawResponseText]);
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
@@ -147,6 +162,12 @@ function Chatbot() {
       window.open(currentLink, '_blank');
     }
     setShowLinkPrompt(false);
+  };
+
+  // Prevent default link click behavior to avoid conflicts with link prompt
+  const handleLinkClick = (e, href) => {
+    e.preventDefault();
+    window.open(href, '_blank');
   };
 
   const handleSubmit = async (e) => {
@@ -191,8 +212,15 @@ function Chatbot() {
     try {
       const response = await api.post('/api/query-chatbot/', formData);
       
-      // Parse and format the response
-      const formattedResponse = formatLLMResponse(response.data);
+      // Store the raw response text for link extraction later
+      const responseText = typeof response.data === 'string' 
+        ? response.data
+        : response.data.response || response.data;
+      
+      setRawResponseText(responseText);
+      
+      // Prepare and format the response with HTML formatting (including links)
+      const formattedResponse = prepareResponseForTyping(responseText);
       
       // Start typing animation
       setFullResponseText(formattedResponse);
@@ -207,7 +235,6 @@ function Chatbot() {
       setMessages(prev => [...prev, { role: 'error', content: 'Sorry, I encountered an error. Please try again.' }]);
     } finally {
       setLoading(false);
-      // No need to clear image here anymore since we did it at the beginning
     }
   };
 
@@ -252,6 +279,12 @@ function Chatbot() {
                     className="message-content"
                     dangerouslySetInnerHTML={{ 
                       __html: index === messages.length - 1 && isTyping ? typingText : msg.content 
+                    }}
+                    onClick={(e) => {
+                      // Handle clicks on links within the response
+                      if (e.target.tagName === 'A') {
+                        handleLinkClick(e, e.target.href);
+                      }
                     }}
                   />
                 ) : (
